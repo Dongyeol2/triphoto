@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load make_link %}
+{% load bootstrap4 %}
+{% load static %}
+{% block body %}
+{% include 'photos/_follow.html' %}
+
+<h1 class="text-center">DETAIL</h1>
+
+<p>글 번호:{{photo.pk}}</p>
+<p>글 제목:{{photo.photo}}</p>
+<p>글 내용:{{photo|hashtag_link|safe }}</p>
+<p>생성시각:{{photo.created_at}}</p>
+<p>수정시각:{{photo.updated_at}}</p>
+<hr>
+
+<a href="{% url 'photos:index' %}">[BACK]</a>
+{% if request.user == photo.user %}
+  <form action="{% url 'photos:delete' photo.pk %}" method="POST">
+    {% csrf_token %}
+    {% buttons submit='DELETE'%}
+    {% endbuttons %}
+  </form>
+  <a href="{% url 'photos:update' photo.pk %}">[UPDATE]</a>
+{% endif %}
+<hr>
+
+{% if user.is_authenticated %}
+<form action="{% url 'articles:comment_create' article.pk %}" method="POST" style="display:inline;"> 
+  {% csrf_token %}
+  {{ comment_form }}
+  {% buttons submit='댓글 작성'%}
+  {% endbuttons %}
+</form>
+{% else %}
+<a href="{% url 'accounts:login' %}">[댓글 작성하려면 로그인 해주세요.]</a>
+{% endif %}
+
+<hr>
+<p><b>댓글목록({{ comments|length }}개)</b></p>
+{% for comment in comments %}
+  <li>
+    <p>[{{ forloop.revcounter }}] {{comment.content}}
+    {% if comment.user == request.user %}
+      <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        {% buttons submit='삭제'%}
+        {% endbuttons %}
+      </from>
+    {% endif %}
+  </li>
+{% empty %}
+  <p>댓글이 없는데요..ㅠㅠㅜ</p>
+{% endfor %}
+
+{% endblock %}

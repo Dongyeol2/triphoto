@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+{% if request.resolver_match.url_name == 'create' %}
+  <h1>CREATE</h1>
+{% else %}
+  <h1>UPDATE<h1>
+{% endif %}
+<hr>
+<div class ="container">
+  <form action="" method='POST' class="mx-auto" style="max-width: 500px;">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    <div>
+      {% buttons submit='제출' reset='초기화' %}
+      {% endbuttons %}
+    </div>
+  </form>  
+</div> 
+<!-- action 갑이 공백일 경우, 현재 위치하고 있는 주소로 요청을 보낸다.
+폼을 던져주는 경로, DB에 저장하는 경로가 동일하다면 공백으로 처리해도 상관없다.-->
+
+<hr>
+<div class="container">
+  {% if request.resolver_match.url_name == 'create' %}
+    <a href="{% url 'photos:index'  %}">[BACK]</a>
+  {% else %}
+    <a href="{% url 'photos:detail' photo.pk %}">[BACK]</a>
+  {% endif %}
+</div>
+
+
+{% endblock body %}

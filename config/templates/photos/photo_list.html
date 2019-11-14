@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+<!-- URL Resolver를 사용해서 제목값 분기 -->
+{% if request.resolver_match.url_name == 'list' %}
+  <h1>List</h1>
+{% else %}
+  <h1>Explore</h1>
+{% endif %}
+<hr>
+{% for photo in photos %}
+  <p>글 제목: {{ photo.photo }}</p>
+  <p>글 내용: {{ photo.content }}</p>
+  <hr>
+  <form action="{% url 'photos:comment_create' photo.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    {% buttons submit='댓글작성' %}
+    {% endbuttons %}
+  </form>
+  <hr>
+{% endfor %}
+{% endblock %}
