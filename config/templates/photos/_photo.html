@@ -3,7 +3,7 @@
       <div class="card-body">
         <h5 class="card-title">작성자 : {{ photo.user }}</h5>
         <h5 class="card-title">사진 : {{ photo.photo }}</h5>
-        <img src="{{photo.photo.url}}" alt="" width="80" height="80" onclick="{% include 'photos/_modal.html'%}">
+          <img data-toggle="modal" data-target="#exampleModal" src="{{photo.photo.url}}" alt="" width="80" height="80" style="cursor: pointer;">
         <p class="card-text">
           <a href="{% url 'photos:like' photo.pk %}">
             <!-- 사용자가 좋아요 누른 상태 -> 꽉찬 하트 -->
@@ -24,3 +24,27 @@
       </div>
     </div>
   </div>
+
+
+
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ photo.user }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{{ photo.photo.url }}" width='300' height='200'> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
