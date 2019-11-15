@@ -9,6 +9,8 @@
 
 <p>글 번호:{{photo.pk}}</p>
 <p>글 제목:{{photo.photo}}</p>
+<p>사진 나와라~{{ photo.photo.url }}</p>
+<img src="{{ photo.photo.url}}" alt="">
 <p>글 내용:{{photo|hashtag_link|safe }}</p>
 <p>생성시각:{{photo.created_at}}</p>
 <p>수정시각:{{photo.updated_at}}</p>
@@ -26,7 +28,7 @@
 <hr>
 
 {% if user.is_authenticated %}
-<form action="{% url 'articles:comment_create' article.pk %}" method="POST" style="display:inline;"> 
+<form action="{% url 'photos:comment_create' photo.pk %}" method="POST" style="display:inline;"> 
   {% csrf_token %}
   {{ comment_form }}
   {% buttons submit='댓글 작성'%}
@@ -42,7 +44,7 @@
   <li>
     <p>[{{ forloop.revcounter }}] {{comment.content}}
     {% if comment.user == request.user %}
-      <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method="POST" style="display:inline;">
+      <form action="{% url 'photos:comment_delete' photo.pk comment.pk %}" method="POST" style="display:inline;">
         {% csrf_token %}
         {% buttons submit='삭제'%}
         {% endbuttons %}

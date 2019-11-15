@@ -3,9 +3,9 @@ from django import template
 register = template.Library()
 
 @register.filter
-def hashtag_link(article):
-  content = photos.content + ' '
-  hashtags = photos.hashtags.all()
+def hashtag_link(photo):
+  content = photo.content + ' '
+  hashtags = photo.hashtags.all()
 
   for hashtag in hashtags:
     content = content.replace(

@@ -12,7 +12,7 @@
   {% endfor %}
   <hr class="my-4">
   {% if user != photo.user %}
-  <a class="btn btn-primary btn-lg" href="{% url 'articles:follow' article.pk person.pk %}" role="button">
+  <a class="btn btn-primary btn-lg" href="{% url 'photos:follow' photo.pk person.pk %}" role="button">
     {% if user in person.followers.all %}
       unfollow
     {% else %}

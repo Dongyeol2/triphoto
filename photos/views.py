@@ -23,10 +23,11 @@ def index(request):
 def create(request):
   #사용자로부터 데이터를 받아서 DB에 저장하는 함수
   if request.method == 'POST':
-    form = PhotoForm(request.POST)
+    form = PhotoForm(request.POST, request.FILES)
     # embed()
     if form.is_valid():
       photo = form.save(commit = False)
+
       photo.user = request.user
       photo=form.save()
       # hashtag
@@ -36,7 +37,7 @@ def create(request):
         if word.startswith('#'):
           hashtag, created = Hashtag.objects.get_or_create(content=word)
           photo.hashtags.add(hashtag)
-    return redirect('photoS:detail', photo.pk)
+    return redirect('photos:detail', photo.pk)
   else:
     form = PhotoForm()
 
@@ -104,7 +105,7 @@ def update(request, photo_pk):
 
 # 댓글 생성 뷰 함수
 @require_POST
-def comment_create(request, article_pk):
+def comment_create(request, photo_pk):
   if request.user.is_authenticated:
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
@@ -158,7 +159,7 @@ def follow(request, photo_pk, user_pk):
     else:
       person.followers.add(user)
     # 게시글 상세정보로 redirect
-  return redirect('photos:detail', article_pk)
+  return redirect('photos:detail', photo_pk)
 
 # 내가 팔로우 하는 사람의 글 + 내가 작성한 글
 def list(request):

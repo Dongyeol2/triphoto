@@ -14,3 +14,4 @@ urlpatterns = [
     path('password/', views.change_password, name='change_password'),
     path('<str:username>/', views.profile, name='profile'),
 ]
+

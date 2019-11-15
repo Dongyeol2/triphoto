@@ -1,7 +1,7 @@
 <div class="col-12 col-md-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">작성자 : {{ article.user }}</h5>
+        <h5 class="card-title">작성자 : {{ photo.user }}</h5>
         <h5 class="card-title">사진 : {{ photo.photo }}</h5>
         <p class="card-text">
           <a href="{% url 'photos:like' photo.pk %}">

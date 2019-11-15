@@ -18,7 +18,7 @@ class Photo(models.Model):
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles', blank=True)
   hashtags = models.ManyToManyField(Hashtag, blank=True)
-
+  
   def __str__(self):
     return f'[{self.pk}] {self.photo}'
 
