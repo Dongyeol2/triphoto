@@ -10,7 +10,7 @@
 <p>글 번호:{{photo.pk}}</p>
 <p>글 제목:{{photo.photo}}</p>
 <p>사진 나와라~{{ photo.photo.url }}</p>
-<img src="{{ photo.photo.url}}" alt="">
+<img src="{{ photo.photo.url}}" alt="" width="200" height="200">
 <p>글 내용:{{photo|hashtag_link|safe }}</p>
 <p>생성시각:{{photo.created_at}}</p>
 <p>수정시각:{{photo.updated_at}}</p>

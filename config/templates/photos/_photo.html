@@ -3,6 +3,7 @@
       <div class="card-body">
         <h5 class="card-title">작성자 : {{ photo.user }}</h5>
         <h5 class="card-title">사진 : {{ photo.photo }}</h5>
+        <img src="{{photo.photo.url}}" alt="" width="80" height="80" onclick="{% include 'photos/_modal.html'%}">
         <p class="card-text">
           <a href="{% url 'photos:like' photo.pk %}">
             <!-- 사용자가 좋아요 누른 상태 -> 꽉찬 하트 -->
