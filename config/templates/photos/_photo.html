@@ -3,7 +3,7 @@
       <div class="card-body">
         <h5 class="card-title">작성자 : {{ photo.user }}</h5>
         <h5 class="card-title">사진 : {{ photo.photo }}</h5>
-          <img data-toggle="modal" data-target="#exampleModal" src="{{photo.photo.url}}" alt="" width="80" height="80" style="cursor: pointer;">
+          <img data-toggle="modal" data-target="#exampleModalCenter" src="{{photo.photo.url}}" alt="" width="80" height="80" style="cursor: pointer;">
         <p class="card-text">
           <a href="{% url 'photos:like' photo.pk %}">
             <!-- 사용자가 좋아요 누른 상태 -> 꽉찬 하트 -->
@@ -27,19 +27,31 @@
 
 
 
-
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- Modal -->
+<div class="modal fade-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{ photo.user }}</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">{{ photo.user }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <img src="{{ photo.photo.url }}" width='300' height='200'> 
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-8">
+              <img src="{{ photo.photo.url }}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-4">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -48,3 +60,6 @@
     </div>
   </div>
 </div>
+
+
+
