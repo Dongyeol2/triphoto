@@ -196,3 +196,8 @@ def hashtag(request, hash_pk):
     'photos' : photos,
   }
   return render(request, 'photos/hashtag.html', context)
+
+
+
+def test(request):
+  return render(request, 'photos/test.html')

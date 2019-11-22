@@ -1,11 +1,12 @@
-<div class="col-12 col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">작성자 : {{ photo.user }}</h5>
-        <h5 class="card-title">사진 : {{ photo.photo }}</h5>
-          <img data-toggle="modal" data-target="#exampleModalCenter" src="{{photo.photo.url}}" alt="" width="80" height="80" style="cursor: pointer;">
-        <p class="card-text">
-          <a href="{% url 'photos:like' photo.pk %}">
+<div class="col-12 col-md-4">
+  <figure class="snip1368">
+    <img data-toggle="modal" data-target="#exampleModalCenter" id="my-img" src="{{photo.photo.url}}" alt="" width="100%%" height="auto" style="cursor: pointer;">
+    
+    <h3 class="card-title"> {{ photo.photo }}</h3>
+    <figcaption>
+      <div class="icons">
+
+        <a href="{% url 'photos:like' photo.pk %}">
             <!-- 사용자가 좋아요 누른 상태 -> 꽉찬 하트 -->
             <!--- python list in 사용 -->
             {% if request.user in photo.like_users.all%}
@@ -14,22 +15,18 @@
             {% else %}
               <i class="far fa-heart"></i>
             {% endif %}
-          </a><br>
+        </a>
 
-          {{ photo.like_users.all|length }}명이 좋아합니다.<br>
-          생성시각 : {{ photo.created_at }}
-          
-        </p>
-        <a href="{% url 'photos:detail' photo.pk %}" class="btn btn-primary">상세보기</a>
       </div>
-    </div>
-  </div>
+    </figcaption>
+  </figure>
+</div>
 
 
 
 <!-- Modal -->
-<div class="modal fade-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered-lg" role="document">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">{{ photo.user }}</h5>
