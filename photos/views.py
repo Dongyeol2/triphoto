@@ -26,6 +26,7 @@ def create(request):
     form = PhotoForm(request.POST, request.FILES)
     # embed()
     if form.is_valid():
+
       photo = form.save(commit = False)
 
       photo.user = request.user

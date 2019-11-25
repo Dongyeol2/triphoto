@@ -17,8 +17,9 @@
 <a href="{% url 'photos:create' %}">[NEW]</a>
 <hr>
 
-<div class = "row">
+<div id="portfolio">
   {% for photo in photos %}
+    
     {% include 'photos/_photo.html' %}
   {% endfor %}
   <hr>
