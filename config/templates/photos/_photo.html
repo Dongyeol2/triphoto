@@ -2,7 +2,7 @@
   <figure class="snip1368">
     <img data-toggle="modal" data-target="#exampleModalCenter" id="my-img" src="{{photo.photo.url}}" alt="" width="100%%" height="auto" style="cursor: pointer;">
 
-    <h3 class="card-title"> {{ photo.photo }}</h3>
+    {% comment %} <h3 class="card-title"> {{ photo.photo }}</h3> {% endcomment %}
     <figcaption>
       <div class="icons">
 
@@ -16,7 +16,6 @@
               <i class="far fa-heart"></i>
             {% endif %}
         </a>
-
       </div>
     </figcaption>
   </figure>
@@ -52,8 +51,14 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        {% if photo.user == user %}
+          <form action="{% url 'photos:delete' photo.pk  %}" method="POST" style="display: inline;">
+            {% csrf_token %}
+            <input type="submit" value="DELETE">
+          </form>
+        {% endif %}
+        {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
       </div>
     </div>
   </div>

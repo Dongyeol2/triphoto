@@ -26,10 +26,13 @@ def create(request):
     form = PhotoForm(request.POST, request.FILES)
     # embed()
     if form.is_valid():
-
       photo = form.save(commit = False)
 
+      photo.longitude = 0.456
+      photo.latitude = 0.111
+      
       photo.user = request.user
+
       photo=form.save()
       # hashtag
       # 게시글 내용을 split해서 리스트로 만듦
